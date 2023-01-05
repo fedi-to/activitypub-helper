@@ -1,5 +1,5 @@
 // just accept any json, AP doesn't have a real spec.
-const json_media_type = /^application\/([a-z]+\+)?json/
+const json_media_type = /^application\/([a-z]+\+)?json/;
 
 (function() {
 	// Based on https://github.com/fedi-to/fedi-to.github.io/blob/main/protocol-handler.md
