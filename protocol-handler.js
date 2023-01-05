@@ -1,3 +1,6 @@
+// just accept any json, AP doesn't have a real spec.
+const json_media_type = /^application\/([a-z]+\+)?json/
+
 (function() {
 	// Based on https://github.com/fedi-to/fedi-to.github.io/blob/main/protocol-handler.md
 	var url = new URL(document.location.href);
@@ -29,11 +32,7 @@
 		mode: "cors"
 	}).then((response) => {
 		var ct = response.headers.get("Content-Type");
-		if (
-			ct.startsWith("application/activity+json")
-			||
-			ct.startsWith("application/ld+json")
-		) {
+		if (json_media_type.test(ct)) {
 			document.location = ap_url;
 		}
 	});
@@ -45,11 +44,7 @@
 		mode: "cors"
 	}).then((response) => {
 		var ct = response.headers.get("Content-Type");
-		if (
-			ct.startsWith("application/activity+json")
-			||
-			ct.startsWith("application/ld+json")
-		) {
+		if (json_media_type.test(ct)) {
 			document.location = ap_url;
 		}
 	});
