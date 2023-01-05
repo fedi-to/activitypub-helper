@@ -36,5 +36,21 @@
 		) {
 			document.location = ap_url;
 		}
-	})
+	});
+	// also attempt application/activity+json as it avoids CORS preflight
+	// (this races with the above fetch but it's fine really)
+	fetch(ap_url, {
+		method: "GET",
+		headers: {Accept: 'application/activity+json'},
+		mode: "cors"
+	}).then((response) => {
+		var ct = response.headers.get("Content-Type");
+		if (
+			ct.startsWith("application/activity+json")
+			||
+			ct.startsWith("application/ld+json")
+		) {
+			document.location = ap_url;
+		}
+	});
 })();
