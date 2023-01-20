@@ -31,6 +31,9 @@ const json_media_type = /^application\/([a-z]+\+)?json/;
 		headers: {Accept: 'application/ld+json; profile="https://www.w3.org/ns/activitystreams"'},
 		mode: "cors"
 	}).then((response) => {
+		if (!response.ok) {
+			return;
+		}
 		var ct = response.headers.get("Content-Type");
 		if (json_media_type.test(ct)) {
 			document.location = ap_url;
@@ -43,6 +46,9 @@ const json_media_type = /^application\/([a-z]+\+)?json/;
 		headers: {Accept: 'application/activity+json'},
 		mode: "cors"
 	}).then((response) => {
+		if (!response.ok) {
+			return;
+		}
 		var ct = response.headers.get("Content-Type");
 		if (json_media_type.test(ct)) {
 			document.location = ap_url;
